@@ -27,6 +27,7 @@ h1{
 img{
 	margin: 30px auto;
 	width: 70px;
+	background-color: transparent;
 }
 
 p{
