@@ -10,6 +10,13 @@ body {
 	max-width: 390px;
 }
 
+.h4 {
+    display: block;
+    margin: 10px 10px 10px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
 .inner {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
