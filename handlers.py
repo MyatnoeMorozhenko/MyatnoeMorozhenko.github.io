@@ -23,7 +23,6 @@ PRICE = {
 async def buy_process(web_app_message):
     await bot.send_invoice(web_app_message.chat.id,
                            title='Digital Breakfast',
-                           photo_url:'https://myatnoemorozhenko.github.io/1.png', photo_width: 150, photo_height: 150
                            description='Завтрак с Connect',
                            provider_token= pay_token,
                            currency='rub',
