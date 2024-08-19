@@ -11,7 +11,7 @@ async def start(message: types.Message):
 pay_token = '1744374395:TEST:c172bfd1a3258f663519'
 
 PRICE = {
-    '1': [types.LabeledPrice(label='Английский завтрак', amount=100000],
+    '1': [types.LabeledPrice(label='Английский завтрак', amount=100000)],
     '2': [types.LabeledPrice(label='Бутерброд по-македонски', amount=70000)],
     '3': [types.LabeledPrice(label='Йогурт с Яной', amount=65000)],
     '4': [types.LabeledPrice(label='Комбо: Mindbox + колла от Мартина', amount=20000)],
