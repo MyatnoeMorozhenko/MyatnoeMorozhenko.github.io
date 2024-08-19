@@ -2,7 +2,10 @@ from aiogram import Bot, Dispatcher
 
 import asyncio
 
-bot = Bot(token=TOKEN)
+from dotenv import load_dotenv
+
+load_dotenv()
+bot = Bot(os.getenv('TOKEN'))
 dp = Dispatcher(bot=bot)
 
 async def main():
