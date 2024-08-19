@@ -5,7 +5,7 @@ from aiogram.dispatcher.filters import Command
 
 @dp.message_handler(Command('start'))
 async def start(message: types.Message):
-    await bot.send_message(message.chat.id, 'Жми на кнопку и выбирай свой digital breakfast',
+    await bot.send_message(message.chat.id, 'Жми на кнопку и выбирай свой digital breakfast \U0001F373',
                            reply_markup=keyboard)
 
 pay_token = '1744374395:TEST:c172bfd1a3258f663519'
