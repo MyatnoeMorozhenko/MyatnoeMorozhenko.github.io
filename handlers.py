@@ -26,8 +26,8 @@ async def buy_process(web_app_message):
                            currency='rub',
                            need_email=True,
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
-                           start_parameter='example',
-                           payload='some_invoice')
+                           payload = 'level1_pay', provider_token = test, currency = 'RUB',
+                           start_parameter = 'test_bot')
 
 @dp.pre_checkout_query_handler(lambda query: True)
 async def pre_checkout_process(pre_checkout: types.PreCheckoutQuery):
