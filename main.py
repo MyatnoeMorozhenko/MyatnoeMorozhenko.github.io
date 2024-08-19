@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 bot = Bot(os.getenv('TOKEN'))
 dp = Dispatcher(bot=bot)
+pay_token = os.getenv('pay_token')
 
 async def main():
     from handlers import dp
