@@ -22,11 +22,11 @@ async def buy_process(web_app_message):
     await bot.send_invoice(web_app_message.chat.id,
                            title='Laptop',
                            description='Description',
-                           provider_token='pay_token',
                            currency='rub',
                            need_email=True,
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
-                           payload = 'level1_pay', provider_token = test, currency = 'RUB',
+                           payload = 'level1_pay', 
+                           provider_token = test,
                            start_parameter = 'test_bot')
 
 @dp.pre_checkout_query_handler(lambda query: True)
