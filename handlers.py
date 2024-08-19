@@ -8,6 +8,8 @@ async def start(message: types.Message):
     await bot.send_message(message.chat.id, 'Жми на кнопку и выбирай свой digital breakfast',
                            reply_markup=keyboard)
 
+pay_token = '381764678:TEST:92864'
+
 PRICE = {
     '1': [types.LabeledPrice(label='Item1', amount=100000)],
     '2': [types.LabeledPrice(label='Item2', amount=200000)],
@@ -22,7 +24,7 @@ async def buy_process(web_app_message):
     await bot.send_invoice(web_app_message.chat.id,
                            title='Laptop',
                            description='Description',
-                           provider_token='pay_token',
+                           provider_token= pay_token,
                            currency='rub',
                            need_email=True,
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
