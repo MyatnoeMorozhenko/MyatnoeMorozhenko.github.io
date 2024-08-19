@@ -22,12 +22,12 @@ async def buy_process(web_app_message):
     await bot.send_invoice(web_app_message.chat.id,
                            title='Laptop',
                            description='Description',
+                           provider_token='pay_token',
                            currency='rub',
                            need_email=True,
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
-                           payload = 'some_invoice', 
-                           provider_token = 'test',
-                           start_parameter = 'example')
+                           start_parameter='example',
+                           payload='some_invoice')
 
 @dp.pre_checkout_query_handler(lambda query: True)
 async def pre_checkout_process(pre_checkout: types.PreCheckoutQuery):
