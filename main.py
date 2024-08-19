@@ -3,7 +3,6 @@ from aiogram.utils import executor
 import asyncio
 import os
 from dotenv import load_dotenv
-from handlers import dp
 
 load_dotenv()
 bot = Bot(os.getenv('TOKEN'))
