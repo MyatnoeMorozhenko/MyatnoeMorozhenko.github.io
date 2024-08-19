@@ -1,7 +1,7 @@
 from aiogram.types import WebAppInfo
 from aiogram import types
 
-web_app = WebAppInfo(url='site_url')
+web_app = WebAppInfo(url='https://myatnoemorozhenko.github.io/')
 
 keyboard = types.ReplyKeyboardMarkup(
     keyboard=[
@@ -9,3 +9,4 @@ keyboard = types.ReplyKeyboardMarkup(
     ],
     resize_keyboard=True
 )
+
