@@ -11,8 +11,7 @@ async def start(message: types.Message):
 pay_token = '1744374395:TEST:c172bfd1a3258f663519'
 
 PRICE = {
-    '1': [types.LabeledPrice(label='Английский завтрак', amount=100000, photo_url:'https://myatnoemorozhenko.github.io/1.png',
-    photo_width: 150, photo_height: 150)],
+    '1': [types.LabeledPrice(label='Английский завтрак', amount=100000],
     '2': [types.LabeledPrice(label='Бутерброд по-македонски', amount=70000)],
     '3': [types.LabeledPrice(label='Йогурт с Яной', amount=65000)],
     '4': [types.LabeledPrice(label='Комбо: Mindbox + колла от Мартина', amount=20000)],
@@ -23,8 +22,9 @@ PRICE = {
 @dp.message_handler(content_types='web_app_data')
 async def buy_process(web_app_message):
     await bot.send_invoice(web_app_message.chat.id,
-                           title='Laptop',
-                           description='Description',
+                           title='Digital Breakfast',
+                           photo_url:'https://myatnoemorozhenko.github.io/1.png', photo_width: 150, photo_height: 150
+                           description='Завтрак с Connect',
                            provider_token= pay_token,
                            currency='rub',
                            need_email=True,
