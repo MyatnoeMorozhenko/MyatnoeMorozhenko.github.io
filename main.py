@@ -1,4 +1,5 @@
 from aiogram import Bot, Dispatcher
+from aiogram.utils import executor
 import asyncio
 import os
 from dotenv import load_dotenv
@@ -16,6 +17,6 @@ async def main():
 
 if __name__ == "__main__":
     try:
-        asyncio.run(main())
+        executor.start_polling(dp, skip_updates=True)
     except (KeyboardInterrupt, SystemExit):
         print('Bot stopped!')
