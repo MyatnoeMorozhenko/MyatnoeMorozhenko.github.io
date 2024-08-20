@@ -47,7 +47,8 @@ body {
 	color: #fff;
 	text-transform: uppercase;
 	font-weight: 700;
-
+	flex-direction: row;
+	
 	transition: background .2s linear;
 }
 
