@@ -38,16 +38,21 @@ body {
 	border-radius: 5px;
 }
 
+.heading{
+	font-weight: 400;
+	text-align: center;
+	margin: 13px 10px;
+}
+
 .btn {
-	display: flex;
-	padding: 0.6rem 0.8rem;
+	display: inline-block;
+	padding: 10px 20px;
 	border: none;
 	background: rgb(248, 168, 24);
 	border-radius: 10px;
 	color: #fff;
 	text-transform: uppercase;
 	font-weight: 700;
-	flex-direction: row;
 	
 	transition: background .2s linear;
 }
