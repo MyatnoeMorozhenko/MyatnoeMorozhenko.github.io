@@ -26,7 +26,6 @@ async def buy_process(web_app_message):
                            description='Завтрак с Connect',
                            provider_token= pay_token,
                            currency='rub',
-                           need_email=True,
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
                            start_parameter='example',
                            payload='some_invoice')
