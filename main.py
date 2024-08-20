@@ -10,7 +10,7 @@ dp = Dispatcher(bot=bot)
 
 HOST, PORT = "0.0.0.0", 10000
 
-async def main():
+async def main(host,port):
     from handlers import dp
     try:
         await dp.start_polling()
