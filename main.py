@@ -8,6 +8,9 @@ load_dotenv()
 bot = Bot(os.getenv('TOKEN'))
 dp = Dispatcher(bot=bot)
 
+HOST = "0.0.0.0"
+porrtt = 10000
+
 async def main():
     from handlers import dp
     try:
@@ -17,6 +20,6 @@ async def main():
 
 if __name__ == "__main__":
     try:
-        asyncio.run(main())
+        asyncio.run(main(HOST, PORT))
     except (KeyboardInterrupt, SystemExit):
         print('Bot stopped!')
