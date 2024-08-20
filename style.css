@@ -22,11 +22,18 @@ body {
 .img {
 	width: 150px;
 }
-.h4 {
-    margin: 10px 10px 10px;
-}
+
 .item {
-	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 150px;
+	height: 250px;
+	border: 2px solid var(--primary-color);
+	padding: 0.5rem 0.3rem;
+	margin: 13px 10px;
+	position: relative;
+	border-radius: 5px;
 }
 
 .btn {
