@@ -3,6 +3,13 @@ from keyboards import keyboard
 from aiogram import types
 from aiogram.dispatcher.filters import Command
 import psycopg2
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters.state import State, StatesGroup
+
+#прописываю классы машины состояний
+class FSMAdmin(StatesGroup):
+    message =State()
 
 DB_URL = 'postgresql://postgres:FRQlnZKVGPgRvCSUcZaDfYlqWZtUpsJd@junction.proxy.rlwy.net:10150/railway'
 pay_token = '1744374395:TEST:c172bfd1a3258f663519'
@@ -12,9 +19,12 @@ db = psycopg2.connect(DB_URL, sslmode='require')
 db_object = db.cursor()
 
 @dp.message_handler(Command('start'))
-async def start(message: types.Message):
+async def start(message: types.Message, state: FSMContext):
     await bot.send_message(message.chat.id, 'Жми на кнопку и выбирай свой digital breakfast \U0001F373',
                            reply_markup=keyboard)
+    user_id = message.from_user.id
+    username = msg.from_user.username
+    await Start.age.set()#перехожу в режим ожидания ответа
 
 
 PRICE = {
@@ -36,7 +46,7 @@ PRODUCT = {
 }
 
 @dp.message_handler(content_types='web_app_data')
-async def buy_process(web_app_message):
+async def buy_process(web_app_message, state: FSMContext):
     await bot.send_invoice(web_app_message.chat.id,
                            title='Digital Breakfast',
                            description='Завтрак с Connect',
@@ -46,8 +56,6 @@ async def buy_process(web_app_message):
                            start_parameter='example',
                            payload='some_invoice')
   #коннект с бд   
-    user_id = web_app_message.chat.id
-    username = f"{tg.initDataUnsafe.user.first_name}{tg.initDataUnsafe.user.last_name}"
     price = PRICE[f'{web_app_message.web_app_data.data}']
     product = PRODUCT[f'{web_app_message.web_app_data.data}']
     
