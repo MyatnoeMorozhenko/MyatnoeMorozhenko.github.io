@@ -11,10 +11,20 @@ pay_token = '1744374395:TEST:c172bfd1a3258f663519'
 db = psycopg2.connect(DB_URL, sslmode='require')
 db_object = db.cursor()
 
+
 @dp.message_handler(Command('start'))
 async def start(message: types.Message):
     await bot.send_message(message.chat.id, 'Жми на кнопку и выбирай свой digital breakfast \U0001F373',
                            reply_markup=keyboard)
+    user_id = message.from_user.id
+    username = message.from_user.username
+    db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
+    result = db_object.fetchone()
+        
+    if not result:
+        db_object.execute("INSERT INTO users (id, username, price, product) VALUES (%s, %s, %s, %s)", (user_id, username, '0', '-'))
+        db.commit()
+
 
 
 PRICE = {
@@ -45,19 +55,6 @@ async def buy_process(web_app_message):
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
                            start_parameter='example',
                            payload='some_invoice')
-    
-@dp.pre_checkout_query_handler(lambda c: True)  
-async def buy_db(web_app_message, message: types.Messagey): 
-    user_id = message.from_user.id
-    username = message.from_user.username
-    price = PRICE[f'{web_app_message.web_app_data.data}']
-    product = PRODUCT[f'{web_app_message.web_app_data.data}']
-    db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
-    result = db_object.fetchone()
-        
-    if not result:
-        db_object.execute("INSERT INTO users (id, username, price, product) VALUES (%s, %s, %s, %s)", (user_id, username, price, product))
-        db.commit()
 
 @dp.pre_checkout_query_handler(lambda query: True)
 async def pre_checkout_process(pre_checkout: types.PreCheckoutQuery):
