@@ -4,7 +4,7 @@ from aiogram import types
 from aiogram.dispatcher.filters import Command
 import psycopg2
 
-DB_URL = 'postgresql://postgres:FRQlnZKVGPgRvCSUcZaDfYlqWZtUpsJd@postgres.railway.internal:5432/railway'
+DB_URL = 'postgresql://postgres:FRQlnZKVGPgRvCSUcZaDfYlqWZtUpsJd@junction.proxy.rlwy.net:10150/railway'
 pay_token = '1744374395:TEST:c172bfd1a3258f663519'
 
 ### To connect with DATABASE
