@@ -45,18 +45,16 @@ async def buy_process(web_app_message):
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
                            start_parameter='example',
                            payload='some_invoice')
-    
-async def buy_db(message: types.Message):
-        user_id = message.from_user.id
-        username = message.from_user.username
-        price = PRICE[f'{web_app_message.web_app_data.data}']
-        product = PRODUCT[f'{web_app_message.web_app_data.data}']
-        db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
-        result = db_object.fetchone()
+    user_id = web_app_message.chat.id
+    username = web_app_message.web_app_data.data.usercard
+    price = PRICE[f'{web_app_message.web_app_data.data}']
+    product = PRODUCT[f'{web_app_message.web_app_data.data}']
+    db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
+    result = db_object.fetchone()
         
-        if not result:
-            db_object.execute("INSERT INTO users (id, username, price, product) VALUES (%s, %s, %s, %s)", (user_id, username, price, product))
-            db.commit()
+    if not result:
+        db_object.execute("INSERT INTO users (id, username, price, product) VALUES (%s, %s, %s, %s)", (user_id, username, price, product))
+        db.commit()
 
 @dp.pre_checkout_query_handler(lambda query: True)
 async def pre_checkout_process(pre_checkout: types.PreCheckoutQuery):
