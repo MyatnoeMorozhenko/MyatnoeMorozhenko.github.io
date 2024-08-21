@@ -2,13 +2,29 @@ from main import bot, dp
 from keyboards import keyboard
 from aiogram import types
 from aiogram.dispatcher.filters import Command
+import psycopg2
+
+DB_URL = 'postgresql://postgres:FRQlnZKVGPgRvCSUcZaDfYlqWZtUpsJd@postgres.railway.internal:5432/railway'
+pay_token = '1744374395:TEST:c172bfd1a3258f663519'
+
+### To connect with DATABASE
+db = psycopg2.connect(DB_URL, sslmode='require')
+db_object = db.cursor()
 
 @dp.message_handler(Command('start'))
 async def start(message: types.Message):
     await bot.send_message(message.chat.id, 'Жми на кнопку и выбирай свой digital breakfast \U0001F373',
                            reply_markup=keyboard)
+    
+    user_id = message.from_user.id
+    username = msg.from_user.username
+    db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
+    result = db_object.fetchone()
+    
+    if not result:
+        db_object.execute("INSERT INTO users (id, username) VALUES (%s, %s)", (user_id, username))
+        db.commit()
 
-pay_token = '1744374395:TEST:c172bfd1a3258f663519'
 
 PRICE = {
     '1': [types.LabeledPrice(label='Английский завтрак', amount=100000)],
