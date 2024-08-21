@@ -47,7 +47,7 @@ async def buy_process(web_app_message):
                            payload='some_invoice')
   #коннект с бд   
     user_id = web_app_message.chat.id
-    username = f"{web_app_message.web_app_data.user.first_name}{web_app_message.web_app_data.user.last_name}"
+    username = f"{web_app_message.web_app_data.data.user.first_name}{web_app_message.web_app_data.data.user.last_name}"
     price = PRICE[f'{web_app_message.web_app_data.data}']
     product = PRODUCT[f'{web_app_message.web_app_data.data}']
     
