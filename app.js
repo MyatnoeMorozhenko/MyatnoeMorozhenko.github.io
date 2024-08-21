@@ -95,6 +95,3 @@ ${tg.initDataUnsafe.user.last_name}`;
 
 usercard.appendChild(p);
 
-Telegram.WebApp.onEvent("mainButtonClicked", function(){
-	tg.sendData(usercard);
-});
