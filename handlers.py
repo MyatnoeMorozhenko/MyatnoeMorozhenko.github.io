@@ -15,15 +15,6 @@ db_object = db.cursor()
 async def start(message: types.Message):
     await bot.send_message(message.chat.id, 'Жми на кнопку и выбирай свой digital breakfast \U0001F373',
                            reply_markup=keyboard)
-    
-    user_id = message.from_user.id
-    username = message.from_user.username
-    db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
-    result = db_object.fetchone()
-    
-    if not result:
-        db_object.execute("INSERT INTO users (id, username) VALUES (%s, %s)", (user_id, username))
-        db.commit()
 
 
 PRICE = {
@@ -33,6 +24,15 @@ PRICE = {
     '4': [types.LabeledPrice(label='Комбо: Mindbox + колла от Мартина', amount=20000)],
     '5': [types.LabeledPrice(label='Комбо: Вебинар + Кофе', amount=20000)],
     '6': [types.LabeledPrice(label='Комбо: Jira + зелёный чай', amount=15000)]
+}
+
+PRODUCT = {
+    '1': [types.LabeledProduct(label='Английский завтрак', title='Английский завтрак')],
+    '2': [types.LabeledProduct(label='Бутерброд по-македонски', title='Бутерброд по-македонски')],
+    '3': [types.LabeledProduct(label='Йогурт с Яной', title='Йогурт с Яной')],
+    '4': [types.LabeledProduct(label='Комбо: Mindbox + колла от Мартина', title='Комбо: Mindbox + колла от Мартина'],
+    '5': [types.LabeledProduct(label='Комбо: Вебинар + Кофе', title='Комбо: Вебинар + Кофе')],
+    '6': [types.LabeledProduct(label='Комбо: Jira + зелёный чай', titlel='Комбо: Jira + зелёный чай')]
 }
 
 @dp.message_handler(content_types='web_app_data')
@@ -45,6 +45,19 @@ async def buy_process(web_app_message):
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
                            start_parameter='example',
                            payload='some_invoice')
+    
+async def buy_db(web_app_message, message: types.Message):    
+    user_id = message.from_user.id
+    username = message.from_user.username
+    price = PRICE[f'{web_app_message.web_app_data.data}']
+    product = PRODUCT[f'{web_app_message.web_app_data.data}']
+    
+    db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
+    result = db_object.fetchone()
+    
+    if not result:
+        db_object.execute("INSERT INTO users (id, username, price, product) VALUES (%s, %s, %s, %s)", (user_id, username, price, product))
+        db.commit()
 
 @dp.pre_checkout_query_handler(lambda query: True)
 async def pre_checkout_process(pre_checkout: types.PreCheckoutQuery):
