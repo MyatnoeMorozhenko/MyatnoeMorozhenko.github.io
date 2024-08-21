@@ -30,7 +30,7 @@ PRODUCT = {
     '1': [types.LabeledProduct(label='Английский завтрак', title='Английский завтрак')],
     '2': [types.LabeledProduct(label='Бутерброд по-македонски', title='Бутерброд по-македонски')],
     '3': [types.LabeledProduct(label='Йогурт с Яной', title='Йогурт с Яной')],
-    '4': [types.LabeledProduct(label='Комбо: Mindbox + колла от Мартина', title='Комбо: Mindbox + колла от Мартина'],
+    '4': [types.LabeledProduct(label='Комбо: Mindbox + колла от Мартина', title='Комбо: Mindbox + колла от Мартина')],
     '5': [types.LabeledProduct(label='Комбо: Вебинар + Кофе', title='Комбо: Вебинар + Кофе')],
     '6': [types.LabeledProduct(label='Комбо: Jira + зелёный чай', titlel='Комбо: Jira + зелёный чай')]
 }
