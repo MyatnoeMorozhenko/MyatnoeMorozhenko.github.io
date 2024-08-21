@@ -17,7 +17,7 @@ async def start(message: types.Message):
                            reply_markup=keyboard)
     
     user_id = message.from_user.id
-    username = msg.from_user.username
+    username = message.from_user.username
     db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
     result = db_object.fetchone()
     
