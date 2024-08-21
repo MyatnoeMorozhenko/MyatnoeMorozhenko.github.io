@@ -55,6 +55,12 @@ async def buy_process(web_app_message):
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
                            start_parameter='example',
                            payload='some_invoice')
+    
+    product_1 = PRODUCT[f'{web_app_message.web_app_data.data}']
+    price_1 = PRICE[f'{web_app_message.web_app_data.data}']
+    
+    db_object.execute("UPDATE users SET price = price_1, product = product_1 WHERE id = {web_app_message.chat.id})
+    db.commit()
 
 @dp.pre_checkout_query_handler(lambda query: True)
 async def pre_checkout_process(pre_checkout: types.PreCheckoutQuery):
