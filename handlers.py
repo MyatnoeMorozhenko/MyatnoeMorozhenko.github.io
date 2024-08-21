@@ -15,15 +15,6 @@ db_object = db.cursor()
 async def start(message: types.Message):
     await bot.send_message(message.chat.id, 'Жми на кнопку и выбирай свой digital breakfast \U0001F373',
                            reply_markup=keyboard)
-    user_id = message.from_user.id
-    username = message.from_user.username
-    
-    db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
-    result = db_object.fetchone()
-    
-    if not result:
-        db_object.execute("INSERT INTO users (id, username, price, product) VALUES (%s, %s, %s, %s)", (user_id, username, "-", "-"))
-        db.commit()
 
 
 PRICE = {
@@ -64,7 +55,7 @@ async def buy_process(web_app_message):
     result = db_object.fetchone()
     
     if not result:
-        db_object.execute("UPDATE users SET price = price, product = product WHERE price = ""))
+        db_object.execute("INSERT INTO users (id, username, price, product) VALUES (%s, %s, %s, %s)", (user_id, username, price, product))
         db.commit()
 
 @dp.pre_checkout_query_handler(lambda query: True)
