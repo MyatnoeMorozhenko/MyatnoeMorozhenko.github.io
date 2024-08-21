@@ -45,9 +45,10 @@ async def buy_process(web_app_message):
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
                            start_parameter='example',
                            payload='some_invoice')
-    async def buy_db(message: types.Message):
+    
+async def buy_db(message: types.Message):
         user_id = message.from_user.id
-        username = msg.from_user.username
+        username = message.from_user.username
         price = PRICE[f'{web_app_message.web_app_data.data}']
         product = PRODUCT[f'{web_app_message.web_app_data.data}']
         db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
