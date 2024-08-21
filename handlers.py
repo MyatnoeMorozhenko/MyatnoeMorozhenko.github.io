@@ -36,7 +36,7 @@ PRODUCT = {
 }
 
 @dp.message_handler(content_types='web_app_data')
-async def buy_process(web_app_message):
+async def buy_process(web_app_message, message: types.Message):
     await bot.send_invoice(web_app_message.chat.id,
                            title='Digital Breakfast',
                            description='Завтрак с Connect',
@@ -45,8 +45,9 @@ async def buy_process(web_app_message):
                            prices=PRICE[f'{web_app_message.web_app_data.data}'],
                            start_parameter='example',
                            payload='some_invoice')
-    user_id = web_app_message.chat.id
-    username = web_app_message.web_app_data.data.usercard
+    
+    user_id = message.from_user.id
+    username = message.from_user.username
     price = PRICE[f'{web_app_message.web_app_data.data}']
     product = PRODUCT[f'{web_app_message.web_app_data.data}']
     db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
