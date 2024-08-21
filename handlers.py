@@ -34,9 +34,9 @@ PRODUCT = {
     '5': [types.Invoice(title='Комбо: Вебинар + Кофе')],
     '6': [types.Invoice(titlel='Комбо: Jira + зелёный чай')]
 }
-"""
+
 @dp.message_handler(content_types='web_app_data')
-async def buy_process(message: types.Message, web_app_message):
+async def buy_process(web_app_message):
     await bot.send_invoice(web_app_message.chat.id,
                            title='Digital Breakfast',
                            description='Завтрак с Connect',
@@ -54,26 +54,6 @@ async def buy_process(message: types.Message, web_app_message):
     db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
     result = db_object.fetchone()
     
-    if not result:
-        db_object.execute("INSERT INTO users (id, username, price, product) VALUES (%s, %s, %s, %s)", (user_id, username, price, product))
-        db.commit()"""
-
-@dp.message_handler(content_types='web_app_data')
-async def buy_process(message: types.Message, web_app_message):
-    await bot.send_invoice(web_app_message.chat.id,
-                           title='Digital Breakfast',
-                           description='Завтрак с Connect',
-                           provider_token= pay_token,
-                           currency='rub',
-                           prices=PRICE[f'{web_app_message.web_app_data.data}'],
-                           start_parameter='example',
-                           payload='some_invoice')  
-    user_id = message.from_user.id
-    username = message.from_user.username
-    price = PRICE[f'{web_app_message.web_app_data.data}']
-    product = PRODUCT[f'{web_app_message.web_app_data.data}']
-    db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
-    result = db_object.fetchone()
     if not result:
         db_object.execute("INSERT INTO users (id, username, price, product) VALUES (%s, %s, %s, %s)", (user_id, username, price, product))
         db.commit()
