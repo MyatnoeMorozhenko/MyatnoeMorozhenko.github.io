@@ -36,7 +36,7 @@ PRODUCT = {
 }
 
 @dp.message_handler(content_types='web_app_data')
-async def buy_process(web_app_message, message: types.Message):
+async def buy_process(message: types.Message, web_app_message):
     await bot.send_invoice(web_app_message.chat.id,
                            title='Digital Breakfast',
                            description='Завтрак с Connect',
